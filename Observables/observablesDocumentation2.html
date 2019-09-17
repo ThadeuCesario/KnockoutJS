@@ -1,0 +1,45 @@
+<!--https://knockoutjs.com/documentation/observables.html-->
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Princípios Knockout JS</title>
+</head>
+<body>
+    <span>The name is <span data-bind="text: personName"></span></span>
+    <footer>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                var myViewlModel = {
+                    personName: ko.observable('Bob'),
+                    personAge: ko.observable(123)
+                }
+
+                /* For advanced users, if you want to register your own subscriptions to be notified
+                 * of changes to observables, you can call their 'subscribe' function.
+                 */
+                var sub = myViewlModel.personName.subscribe(function(newValue){
+                    alert(`The person's name is ${newValue}`)
+                    //sub.dispose();  /*Exemplo em vídeo: https://www.loom.com/share/31ea983c770049d6a67d9a98ce7fd639*/
+                });
+                /* The 'subscribe' function is how many parts of KO work internally. Most of the time
+                 * you don't need to use this, because the built-in bindings and templating system
+                 * take care of managing subscriptions.
+                 * 
+                 * The 'subscribe' function accepts three parameters: 'callback' is the function
+                 * that is called whenever the notification happens; 'target'(optional) defines
+                 *  the value of 'this' in the callback function; 'event'(optional, default is 'change')
+                 *  is the name of the event to receive notification for.
+                 * 
+                 * You can also terminate 
+                 */
+
+                vm = myViewlModel;
+                ko.applyBindings(vm);
+            </script>
+    </footer>
+</body>
+</html>
