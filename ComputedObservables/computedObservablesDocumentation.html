@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Computed Observables</title>
+</head>
+<body>
+    <p>First Name:&nbsp;<input data-bind="value: firstName" /></p>
+    <p>Second Name:&nbsp;<input data-bind="value: secondName" /></p>
+    <p>Full Name:&nbsp;<strong data-bind="text: fullName" ></strong></p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        /* What if you've got observable for firstName, and another for lastName, and you want to 
+         * display the full name? That's where computed observables come in = these are functions
+         * that are dependent on one or more other observables, and will automatically update
+         *  whenever any of these dependencies change.
+         */
+        
+        function viewModel(){
+            this.firstName = ko.observable("Hello");
+            this.secondName = ko.observable("World !");
+            this.fullName = ko.computed(function(){
+                return this.firstName() + " " + this.secondName();
+            }, this);    
+        }
+        ko.applyBindings(viewModel());
+    </script>
+</body>
+</html>
