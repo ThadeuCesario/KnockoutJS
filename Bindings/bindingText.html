@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>O binding "Text"</title>
+</head>
+<body>
+    <div>
+        Today's message is: <span data-bind="text: myMessage"></span>
+    </div>
+    <footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+        /* O binding text faz com que o elemento DOM associado exiba o valor do seu parâmetro.
+         * Geralmente isso é util com elementos como <span> ou <em> que normalmente exibe texto, 
+         * mas tecnicamente você pode usar com qualquer elemento.
+         */
+        /*var viewModel = {
+            myMessage: ko.observable()
+        };
+        viewModel.myMessage("Hello World!")*/
+        var viewModel = function(){
+            this.myMessage = ko.observable("Hello World");
+        }
+        vm = new viewModel();
+        ko.applyBindings(vm);
+        </script>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Binding Attr</title>
+</head>
+<body>
+    <a data-bind="attr: {href:url, title: details}">Report</a>
+    <footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+         /* O binding 'attr' fornece uma maneira genérica para setar o valor de qualquer atributo
+          * para o elemento DOM associado. Isso é útil, por exemplo, quando você precisa setar o
+          * atributo 'title' de um elemento, o src de uma tag 'img' ou o href de um link com base
+          * no seu view model, com o valor do atributo sendo atualizado automaticamente sempre
+          * que a propriedade correspondente do model for alterado.
+          * 
+          * Abaixo estou setando o href do elemento para o site do google e o title para 
+          * 'URL do Google :D'.           
+          */
+
+            var viewModel = function(){
+                this.url = ko.observable("https://www.google.com.br");
+                this.details = ko.observable("URL do Google :D");
+            }
+            var vm = new viewModel();
+            ko.applyBindings(vm);
+        </script>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!--Exemplo com classes estáticas-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Binding CSS</title>
+    <style type="text/css">
+        .profitWarning{
+            color: #f00;
+        }
+    </style>
+</head>
+<body>
+    <div data-bind="css: {profitWarning: currentProfit() < 0}">
+        Profit Information
+    </div>
+    <footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            /* Propósito:
+             * O binding css adiciona ou remove um ou mais classes CSS associado no elemento DOM.
+             * Isso é útil, por exemplo, para destacar algum valor em vermelho se for negativo.
+             * (Nota: Se você não quer aplicar uma classe CSS, mas que atribuir um valor para
+             * o atributo style diretamente, veja o binding style)
+             *
+             * Nesse exemplo, será aplicado a classe CSS profitWarning sempre que o valor de
+             * currentProfit for menor que zero e vai remover a classe sempre que o valor
+             * for maior que zero.
+             */
+            var viewModel = function(){
+                this.currentProfit = ko.observable(200);
+            }
+            var vm = new viewModel();
+            ko.applyBindings(vm);
+        </script>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!-- Usando funções e expressões para setar valores de texto. -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>O binding "Text"</title>
+</head>
+<body>
+    <div>
+        The item is <span data-bind="text: priceRanting"></span> today.
+    </div>
+    <footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+        var viewModel = function(){
+            this.price = ko.observable(25);
+            
+            this.priceRanting = ko.computed(function(){
+                return this.price() > 50 ? "expensive" : "affordable";
+            },this);
+        }
+        vm = new viewModel();
+        ko.applyBindings(vm);
+        </script>
+    </footer>
+</body>
+</html>

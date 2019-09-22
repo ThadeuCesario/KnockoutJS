@@ -1,0 +1,73 @@
+<!-- https://knockoutjs.com/documentation/visible-binding.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style type="text/css">
+        .btn{
+            border-radius: 30px;
+            width: 50%;
+            margin: 30px auto;
+            text-align: center;
+            font-weight: bold;
+            line-height: 50px;
+            font-size: 20px;
+            color: white;
+        }
+        #on{
+            border: solid 1px green;
+            background: green;
+        }
+        #off{
+            border: solid 1px red;
+            background: red;
+        }
+    </style>
+    <title>The visible and hidden bindingns</title>
+</head>
+<body>
+    <div data-bind="visible: ligarSistema" class="btn" id="on">
+        Sistema Ligado
+    </div>
+    <div data-bind="visible: desligarSistema" class="btn" id="off">
+        Sistema Desligado
+    </div>
+    <button data-bind="click: ligarDesligar">ON/OFF</button>
+    <footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type="text/javascript"></script>
+        <script>
+            /* Propósito:
+             * O binding 'visible' faz com que o elemento DOM associado fique oculto ou visivel
+             * dependendo do valor que você informar.
+             */
+            var viewModel = function(){
+                /*  Quando o parâmetro é um valor do tipo false, o binding define 'none' para 
+                 * yourElement.style.display, fazendo com que o elemento fique oculto. Este tem
+                 * prioridade sobre qualquer estilo display que você definiu utilizando CSS.
+                 * 
+                 * Quando o parâmetro é um valor do tipo true, o binding remove o valor de
+                 * yourElement.style.display, fazendo com que o elemento fique visivel.
+                 */
+                this.ligarSistema = ko.observable(true); //visible
+                this.desligarSistema = ko.observable(false); //hidden
+                
+                this.ligarDesligar = function(){
+                    console.log("entrou")
+                    if(document.getElementById("on").style.display === "none"){
+                        document.getElementById("on").style.display = "block";
+                        document.getElementById("off").style.display = "none";
+                    }
+                    else{
+                        document.getElementById("on").style.display = "none";
+                        document.getElementById("off").style.display = "block";
+                    }
+                }
+            }
+            vm = new viewModel();
+            ko.applyBindings(vm);
+        </script>
+    </footer>
+</body>
+</html>

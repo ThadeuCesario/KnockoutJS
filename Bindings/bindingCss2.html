@@ -1,0 +1,41 @@
+<!--Exemplo com classes dinâmicas-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Binding CSS</title>
+    <style type="text/css">
+        .profitWarning{
+            color: #f00;
+        }
+        .profitPositive{
+            color: #0f0;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" data-bind="value: currentProfit"/>
+    <div data-bind="css: profitStatus">
+        Profit Information
+    </div>
+    <footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+        /* Isso irá aplicar a classe CSS profitPositive quando o valor de currentProfit for positivo,
+         * caso contrário ele irá apliar a classe CSS profitWarning.
+         */
+            var viewModel = function(){
+                this.currentProfit = ko.observable(-200);
+
+                this.profitStatus = ko.pureComputed(function(){
+                    return this.currentProfit() < 0 ? 'profitWarning' : 'profitPositive';
+                }, this);
+            }
+            vm = new viewModel();
+            ko.applyBindings(vm);
+        </script>
+    </footer>
+</body>
+</html>
