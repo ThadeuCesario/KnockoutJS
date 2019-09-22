@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>O binding "foreach" - Exemplo 2: Adicionando/Removendo itens de um Array</title>
+</head>
+<body>
+    <h4>People</h4>
+    <ul data-bind="foreach: people">
+        <li>
+            Name at position <span data-bind="text: $index"> </span>:
+            <span data-bind="text: name"> </span>
+            <a href="#" data-bind="click: $parent.removePerson">Remove</a>
+        </li>
+    </ul>
+    <button data-bind="click: addPerson">Add</button>
+    <footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            var viewModel = function(){
+                var self = this;
+
+                self.people = ko.observableArray([
+                    {name: 'Karina'},
+                    {name: 'Thadeu'},
+                    {name: 'Guilherme'},
+                    {name: 'Katharina'}
+                ]);
+
+                self.addPerson = function(){
+                    self.people.push({name: "New at " + new Date()});
+                };
+
+                self.removePerson = function(){
+                    self.people.remove(this);
+                };
+            }
+            var vm = new viewModel();
+            ko.applyBindings(vm);
+
+            /* Nota 1: Acessando itens do array usando $data.
+             * Como mostrado anteriormente, os bindings dentro de um 'foreach' podem referenciar as
+             * propriedades dos itens de um array. 
+             * Mas, e quando é necessário referenciar o item e não uma de suas propriedades? Nesse
+             * caso, pdoe ser utilizado a propriedade de contexto $data. Dentro de um foreach, o $data
+             * significa 'o item atual'. Por exemplo:
+             * 
+             * <ul data-bind="foreach: months">
+             *      <li>
+             *          The current item is: <b data-bind="text:$data"></b>
+             *      </li>
+             * </ul>
+             * <script type="text/javascript">
+             *       ko.applyBindings({
+             *           months: [ 'Jan', 'Feb', 'Mar', 'etc' ]
+             *       });
+             * </ script> 
+             *
+             * Nota 2: Usando o $index, $parent, e outras propriedades de contexto.
+             * Como pode ser visto no exemplo, é possível utilizar o $index para saber o índice do
+             * item atual. Lembrando que o $index é do tipo observable, ou seja, seu valor é alterado
+             * sempre que o índice de um item muda. Por exemplo, se um item é adicionado ou removido
+             * do array.
+             * Além disso, existe o $parent que é utilizado para acessar dados que estão fora do escopo
+             * foreach, por exemplo:
+                    <h1 data-bind="text: blogPostTitle"></h1>
+                    <ul data-bind="foreach: likes">
+                        <li>
+                            <b data-bind="text: name"></b> likes the blog post <b data-bind="text: $parent.blogPostTitle"></b>
+                        </li>
+                    </ul>
+             
+                    
+                    
+            */
+        </script>
+    </footer>
+</body>
+</html>
