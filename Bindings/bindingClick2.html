@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Binding Click 2</title>
+</head>
+<body>
+    <ul data-bind="foreach: places">
+        <li>
+            <span data-bind="text: $data"></span>
+            <button data-bind="click: $parent.removePlace">REMOVE</button>
+        </li>
+    </ul>
+    <footer>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                var viewModel = function(){
+                    const self = this;
+                    self.places = ko.observableArray(['London','Paris','Tokyo','Brasil']);
+
+                    self.removePlace = function(place){
+                        self.places.remove(place);
+                    }
+                }
+                vm = new viewModel();
+                ko.applyBindings(vm);
+                
+                /* Dois pontos a serem observados nesse exemplo:
+                 * 
+                 * Se você estiver dentro de um binding context aninhado, por exemplo, se você estiver 
+                 * dentro de um foreach ou um bloco with, mas sua função está na raiz da viewModel ou
+                 * algum outro contexto pai, você vai precisar do prefixo como $parent ou $root
+                 * para localizar a função.
+                 * 
+                 * Em sua viewmodel, muitas vezes é útil declarar 'self' (ou alguma outra variável)
+                 * como um apelido para this. Fazer isso evita problemas com this sendo redefinidos
+                 * para significar algo mais en eventos manipuladores ou callbacks de chamadas Ajax.
+                 */
+            </script>
+    </footer>
+</body>
+</html>

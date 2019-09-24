@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>O binding "Click"</title>
+</head>
+<body>
+    <div>
+        You've clicked <span data-bind="text: numberOfClicks"></span> times.
+        <br/>
+        <button data-bind="click: incrementClickCounter">Click me</button>
+        <div id="nsvm" data-bind="click: chamandoFuncao">NÃO SOU VIEW MODEL</div>
+    </div>
+    <footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            /* Propósito:
+             * O binding click adiciona um manipulador de eventos para que a sua função Javascript
+             * seja chamada quando o elemento associado for clicado. Isso é mais comumente usado
+             * com elementos button, input e a (address), mas funciona com qualquer elemento
+             * DOM visível.
+             */
+            var viewModel = function(){
+                this.numberOfClicks = ko.observable(0);
+                this.incrementClickCounter = function(){
+                    var count = this.numberOfClicks();
+                    this.numberOfClicks(count+1);
+                }
+            }
+            var vm = new viewModel();
+            ko.applyBindings(vm);
+        </script>
+    </footer>
+</body>
+</html>
