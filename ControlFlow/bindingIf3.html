@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>O binding "if" - Example 1</title>
+</head>
+<body>
+    <ul>
+        <li>This item always appears.</li>
+        <!--ko if: someExpressionGoreHere()-->
+        <li>I want to make this item present/absent dynamically.</li>
+        <!--/ko-->
+    </ul>
+    <footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+        /* Os comentários <!--ko--> e <!--/ko--> funcionarão como marcadores de início/fim,
+         * definindo um "elemento virtual" que contém a marcação. Knockout entende esta sintaxe
+         * de elemento virtual e liga como se você tivesse um conjunto de elementos reais.
+         */
+            var viewModel = function(){
+                this.someExpressionGoreHere = ko.observable(false);
+            }
+            vm = new viewModel();
+            ko.applyBindings(vm);
+        </script>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>O binding "if" - Example 1</title>
+</head>
+<body>
+    <label>
+        <input type="checkbox" data-bind="checked: displayMessage"/>Display Message</label>
+        <div data-bind="if: displayMessage">
+            Here is a message. Astonishing
+        </div>
+    <footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            /* O binding 'if' faz com que uma seção da marcação apareça em seu documento (e tenha o atributo
+             * data-bind aplicada) somente se uma expressão especificada for true (ou um valor equivalente
+             * a true, como um objeto não nulo ou uma string não vazia).
+             * 'if' desempenha um papel semelhante do binding visible. A diferença é que, com o 'visible', a
+             * marcação permanece no DOM e o atributo data-bind é sempre aplicado - o binding visible usa
+             * apenas CSS para alternar a visibilidade do elemento. O binding 'if', no entanto, fisicamente
+             * adiciona ou remove a marcação contida no DOM e só aplica para bindings descendentes se a
+             * expressão for true.
+             */
+
+            var viewModel = function(){
+                this.displayMessage = ko.observable(false);
+            }
+            vm = new viewModel();
+            ko.applyBindings(vm);
+        </script>
+    </footer>
+</body>
+</html>
