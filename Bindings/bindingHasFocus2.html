@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Example 1 : The "hasFocus" binding</title>
+</head>
+<body>
+    <p>
+        Name: 
+        <b data-bind="visible: !editing(), text: name, click:edit"></b>
+        <input data-bind="visible: editing, value: name, hasFocus: editing">
+    </p>
+    <p>
+        <em>
+            Click the name to edit it; click elsewhere to apply changes.
+        </em>
+    </p>
+    <footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+                viewModel = function (name) {
+                    this.name = ko.observable(name);
+                    this.editing = ko.observable(false);
+
+                    this.edit = function(){
+                        this.editing(true);
+                    }
+                }
+            var vm = new viewModel("Bert Bertington");
+            ko.applyBindings(vm);
+        </script>
+    </footer>
+</body>
+
+</html>

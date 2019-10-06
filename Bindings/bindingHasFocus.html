@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Example 1 : The "hasFocus" binding</title>
+</head>
+<body>
+    <input data-bind="hasFocus: isSelected">
+    <button data-bind="click: setIsSelected">Focus programmatically</button>
+    <span data-bind="visible: isSelected">The textbox has focus</span>
+    <footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+                viewModel = function () {
+                    this.isSelected = ko.observable(false);
+                    this.setIsSelected = ko.pureComputed(function () {
+                        this.isSelected(true);
+                    });
+                }
+            var vm = new viewModel();
+            ko.applyBindings(vm);
+        </script>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The event binding</title>
+</head>
+<body>
+    <div>
+        <div data-bind="event: {mouseover: enableDetails, mouseout: disableDetails}">
+            Mouse over me
+        </div>
+        <div data-bind="visible: detailsEnabled">
+            Details
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"  type="text/javascript"></script>
+    <script type="text/javascript">
+    /* The event binding allows you to add an event handler for a specified event so that your 
+     * chosen javascript function will be invoked when that event is triggered for the associeted 
+     * DOM element. This can be used to bind any event, such as 'keypress', 'mouseover' or 
+     * 'mouseout'.
+     */ 
+
+        function viewModel(){
+            this.detailsEnabled = ko.observable(false);
+            this.enableDetails = function(){
+                this.detailsEnabled(true);
+            };
+            this.disableDetails = function(){
+                this.detailsEnabled(false);
+            };
+        }
+        var vm = new viewModel();
+        ko.applyBindings(vm);
+    </script>
+</body>
+</html>
