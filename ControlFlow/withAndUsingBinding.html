@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Example 1 - The "with" and "using" Bindings</title>
+</head>
+<body>
+    <h1 data-bind="text: city"></h1>
+    <p data-bind="using: coords">
+        Latitude: <span data-bind="text: latitude"></span>,
+        Longitude: <span data-bind="text: longitude"></span>
+    </p>
+    <footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+        /* Purpose:
+         * The with and using bindings create a new binding context, so that descendant elements are
+         * bound in the context of a specified object. (The differences between these binding are
+         * described below under Parameters).
+         * 
+         * 
+         * 
+         */
+            ko.applyBindings({
+                city: "London",
+                coords:{
+                    latitude: "10",
+                    longitude: "20"
+                }
+            });
+        </script>
+    </footer>
+</body>
+</html>
